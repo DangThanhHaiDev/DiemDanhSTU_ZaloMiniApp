@@ -34,17 +34,16 @@ const CreateStudent = () => {
         }
     }
 
-  
+
 
     const isValidPhoneNumber = (phone) => {
         const regex = /^0\d{9}$/;
         return regex.test(phone);
     }
     const isValidEmail = (email) => {
-        const regex = /^[^\s@]+@(gmail\.com|stu\.edu\.vn)$/;
+        const regex = /^[^\s@]+@(gmail\.com|stu\.edu\.vn|student\.stu\.edu\.vn)$/;
         return regex.test(email);
-      };
-      
+    };
 
 
     const handleCreate = async () => {
@@ -58,14 +57,14 @@ const CreateStudent = () => {
             setErr("Số điện thoại không hợp lệ")
             return
         }
-        if(!isValidEmail(email)){
+        if (!isValidEmail(email)) {
             setErr("Email không hợp lệ")
             return
         }
-      
-        
-        const lop = classs.find((item)=>(item.classId)===classId)
-        
+
+
+        const lop = classs.find((item) => (item.classId) === classId)
+
 
 
         try {
@@ -79,7 +78,7 @@ const CreateStudent = () => {
                 classId,
                 className: lop.className
             })
-           navigate("/admin")
+            navigate("/admin")
 
         } catch (error) {
             console.log(error);
@@ -108,7 +107,7 @@ const CreateStudent = () => {
                         defaultValue="1"
                         onChange={(value) => setClassId(value)}
                     >
-                        
+
                         <OtpGroup label="Group 1">
                             {
                                 classs.length > 0 &&
@@ -119,7 +118,7 @@ const CreateStudent = () => {
 
                     </Select>
                 </div>
-                
+
 
                 <div className="input-container">
                     <p>Số điện thoại</p>

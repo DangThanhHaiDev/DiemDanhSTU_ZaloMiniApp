@@ -14,16 +14,17 @@ const CreateTeacher = () => {
     const navigate = useNavigate()
     const [isSuccess, setIsSuccess] = useState(false)
     const [err, setErr] = useState("")
-    const [classId, setClassId] = useState("GV")  
+    const [classId, setClassId] = useState("GV")
 
     const isValidPhoneNumber = (phone) => {
         const regex = /^0\d{9}$/;
         return regex.test(phone);
     }
     const isValidEmail = (email) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const regex = /^[^\s@]+@(gmail\.com|stu\.edu\.vn|student\.stu\.edu\.vn)$/;
         return regex.test(email);
-    }
+    };
+
 
 
     const handleCreate = async () => {
@@ -33,14 +34,14 @@ const CreateTeacher = () => {
             setErr("Vui lòng nhập đầy đủ thông tin")
             return
         }
-        if (!isValidPhoneNumber(phone)) {
+        if (!isValidPhoneNumber(phone.trim())) {
             setErr("Số điện thoại không hợp lệ")
             return
         }
-        if (!email.trim()) {
+        if (isValidEmail(!email.trim())) {
             setErr("Email không hợp lệ")
             return
-        }        
+        }
 
 
         try {
@@ -48,10 +49,10 @@ const CreateTeacher = () => {
                 "userId": id.trim(),
                 "fullName": name.trim(),
                 email: email.trim(),
-                phone:phone.trim(),
+                phone: phone.trim(),
                 role: "teacher",
                 username: id,
-                classId:null,
+                classId: null,
                 className: null
             })
             navigate("/admin")
@@ -76,8 +77,8 @@ const CreateTeacher = () => {
                     <p>Tên giảng viên</p>
                     <Input value={name} onChange={e => setName(e.target.value)} />
                 </div>
-                
-                
+
+
 
                 <div className="input-container">
                     <p>Số điện thoại</p>
